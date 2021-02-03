@@ -42,8 +42,6 @@ To run the server, execute:
 We can now also open the application via Heroku using the URL:
 https://bhagyash-capstone-agency.herokuapp.com/
 
-The live application can only be used to generate tokens via Auth0.
-The endpoints can then be tested using curl or Postman along with the generated JWTs.
 
 ## DATA MODELING:
 #### models.py
