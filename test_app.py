@@ -102,7 +102,7 @@ class CapstoneTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 404)
 
     def testPatchActorSuccess(self):
-        res = self.client().patch('/actors/update/1', json=self.new_actor,
+        res = self.client().patch('/actors/update/3', json=self.new_actor,
                                  headers=self.director_header)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
@@ -122,11 +122,11 @@ class CapstoneTestCase(unittest.TestCase):
         self.assertTrue(data['message'],'Successfully updated movie')
 
     def testPatchMoviesFailure(self):
-        res = self.client().patch('/moviesss/update/1', json=self.new_movie)
+        res = self.client().patch('/moviesss/update/3', json=self.new_movie)
         self.assertEqual(res.status_code, 404)
 
     def testDeleteActorSuccess(self):
-        res = self.client().delete('/actors/delete/1', headers=self.director_header)
+        res = self.client().delete('/actors/delete/4', headers=self.director_header)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
@@ -137,7 +137,7 @@ class CapstoneTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 404)
 
     def testDeleteMovieSuccess(self):
-        res = self.client().delete('/movies/delete/1', headers=self.producer_header)
+        res = self.client().delete('/movies/delete/4', headers=self.producer_header)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
