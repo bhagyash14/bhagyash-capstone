@@ -13,18 +13,21 @@ AUTH0_JWT_API_AUDIENCE = 'http://127.0.0.1:5000'
 AUTH0_CLIENT_ID = 'QvsqXaFdw95ybQhMNelS25IaGP3OAmd5'
 AUTH0_CALLBACK_URL = 'http://127.0.0.1:8100'
 
+
 def create_app(test_config=None):
     app = Flask(__name__)
     setup_db(app)
-    cors=CORS(app)
-    #CORS(app,resources={r"/api/": {"origins": "*"}})
+    cors = CORS(app)
+#    #CORS(app,resources={r"/api/": {"origins": "*"}})
 
     @app.after_request
     def after_request(response):
-        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,true')
-        response.headers.add('Access-Control-Allow-Methods', 'GET,PATCH,POST,DELETE,OPTIONS')
+        response.headers.add('Access-Control-Allow-Headers',
+                             'Content-Type,Authorization,true')
+        response.headers.add('Access-Control-Allow-Methods',
+                             'GET,PATCH,POST,DELETE,OPTIONS')
         return response
-    #db_drop_and_create_all()
+#   #db_drop_and_create_all()
 
     @app.route("/authorization/url", methods=["GET"])
     def generate_auth_url():
@@ -36,6 +39,7 @@ def create_app(test_config=None):
         return jsonify({
             'url': url
         })
+
     @app.route('/actors', methods=['GET'])
     @requires_auth('get:actor')
     def get_all_actors(token):
@@ -43,7 +47,7 @@ def create_app(test_config=None):
         return jsonify({
             'success': True,
             'actors': all_actors
-        }),200
+        }), 200
 
     @app.route('/movies', methods=['GET'])
     @requires_auth('get:movie')
@@ -53,7 +57,7 @@ def create_app(test_config=None):
         return jsonify({
             'success': True,
             'movies': all_movies
-        }),200
+        }), 200
 
     @app.route('/actors', methods=['POST'])
     @requires_auth('add:actor')
@@ -66,14 +70,14 @@ def create_app(test_config=None):
         actor_age = data['age']
         actor_gender = data['gender']
 
-        new_actor = Actor(name=actor_name, age=actor_age , gender=actor_gender)
+        new_actor = Actor(name=actor_name, age=actor_age, gender=actor_gender)
         new_actor.insert()
 
         return jsonify({
             'success': True,
-            'message':'Successfully added actor',
+            'message': 'Successfully added actor',
             'created': new_actor.id
-        }),200
+        }), 200
 
     @app.route('/movies', methods=['POST'])
     @requires_auth('add:movie')
@@ -90,9 +94,9 @@ def create_app(test_config=None):
 
         return jsonify({
             'success': True,
-            'message':'Successfully added movie',
+            'message': 'Successfully added movie',
             'created': new_movie.id
-        }),200
+        }), 200
 
     @app.route('/actors/update/<int:id>', methods=['PATCH'])
     @requires_auth('update:actor')
@@ -112,9 +116,9 @@ def create_app(test_config=None):
 
         return jsonify({
             'success': True,
-            'message':'Successfully updated actor',
+            'message': 'Successfully updated actor',
             'actor': actor.id
-        }),200
+        }), 200
 
     @app.route('/movies/update/<int:id>', methods=['PATCH'])
     @requires_auth('update:movie')
@@ -132,9 +136,9 @@ def create_app(test_config=None):
 
         return jsonify({
             'success': True,
-            'message':'Successfully updated movie',
+            'message': 'Successfully updated movie',
             'movie': movie.id
-        }),200
+        }), 200
 
     @app.route('/actors/delete/<int:id>', methods=['DELETE'])
     @requires_auth('delete:actor')
@@ -148,9 +152,9 @@ def create_app(test_config=None):
 
         return jsonify({
             'success': True,
-            'message':'Successfully deleted actor',
+            'message': 'Successfully deleted actor',
             'delete': actor.id
-        }),200
+        }), 200
 
     @app.route('/movies/delete/<int:id>', methods=['DELETE'])
     @requires_auth('delete:movie')
@@ -164,15 +168,15 @@ def create_app(test_config=None):
 
         return jsonify({
             'success': True,
-            'message':'Successfully deleted movie',
+            'message': 'Successfully deleted movie',
             'delete': movie.id
-        }),200
+        }), 200
 
-    ## Error Handling
+#    ## Error Handling
     @app.errorhandler(422)
     def unprocessable(error):
         return jsonify({
-                        "success": False, 
+                        "success": False,
                         "error": 422,
                         "message": "unprocessable"
                         }), 422
