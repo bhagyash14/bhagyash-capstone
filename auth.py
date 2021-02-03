@@ -5,10 +5,10 @@ from jose import jwt
 from urllib.request import urlopen
 
 
-AUTH0_DOMAIN = 'capstone-admin.us.auth0.com'
-ALGORITHMS = ['RS256']
-API_AUDIENCE = 'http://127.0.0.1:5000'
-CLIENT_ID = 'QvsqXaFdw95ybQhMNelS25IaGP3OAmd5'
+AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN')
+ALGORITHMS = os.environ.get['ALGORITHMS']
+API_AUDIENCE = os.environ.get('API_AUDIENCE')
+CLIENT_ID = os.environ.get('CLIENT_ID')
 
 class AuthError(Exception):
     def __init__(self, error, status_code):
