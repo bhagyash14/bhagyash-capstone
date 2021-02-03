@@ -10,10 +10,12 @@ ALGORITHMS = os.environ.get['ALGORITHMS']
 API_AUDIENCE = os.environ.get('API_AUDIENCE')
 CLIENT_ID = os.environ.get('CLIENT_ID')
 
+
 class AuthError(Exception):
     def __init__(self, error, status_code):
         self.error = error
         self.status_code = status_code
+
 
 def get_token_auth_header():
     authentication_header = request.headers.get("Authorization", None)
@@ -35,8 +37,9 @@ def get_token_auth_header():
             'description': 'Authorization header should start with bearer.'
         }, 401)
 
-    token=header_parts[1]
+    token = header_parts[1]
     return token
+
 
 def check_permissions(permission, payload):
     if 'permissions' not in payload:
@@ -50,7 +53,8 @@ def check_permissions(permission, payload):
             'description': 'Permission Not found',
         }, 401)
     return True
-    
+
+
 def verify_decode_jwt(token):
 
     jsonurl = urlopen(f'https://{AUTH0_DOMAIN}/.well-known/jwks.json')
@@ -63,7 +67,7 @@ def verify_decode_jwt(token):
             'code': 'invalid_header',
             'description': 'Authorization failed due to invalid header'
         }, 401)
-    
+
     for key in jwks['keys']:
         if key['kid'] == header_unverified['kid']:
             rsa_key_details = {
@@ -75,7 +79,7 @@ def verify_decode_jwt(token):
             }
     if rsa_key_details:
         try:
-            payload=jwt.decode(
+            payload = jwt.decode(
                 token,
                 rsa_key_details,
                 algorithms=ALGORITHMS,
@@ -104,6 +108,7 @@ def verify_decode_jwt(token):
                 'code': 'invalid_header',
                 'description': 'Failed to find the key.'
             }, 400)
+
 
 def requires_auth(permission=''):
     def requires_auth_decorator(f):
