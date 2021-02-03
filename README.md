@@ -35,7 +35,7 @@ This will install all the required packages.
 
 To run the server, execute:
 ```
- export FLASK_APP=app.py
+ export FLASK_APP=__init.py__
  export FLASK_ENV=development
  python3 -m flask run
  ```
