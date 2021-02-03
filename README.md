@@ -90,8 +90,10 @@ source setup.sh
 
 #### GET '/actors'
 Returns a list of all available actors and return status code.
+```
  curl -i -H "Content-Type: application/json" -X GET -H "Authorization: Bearer $DIRECTOR_TOKEN" http://localhost:5000/actors
-  
+```
+```  
 {
   "actors": [
     {
@@ -115,11 +117,13 @@ Returns a list of all available actors and return status code.
   ],
   "success": true
 }
-
+```
 #### GET '/movies'
 Returns a list of all available movies and return status code.
+```
 curl -i -H "Content-Type: application/json" -X GET -H "Authorization: Bearer $ASSISTANT_TOKEN" http://localhost:5000/movies
-
+```
+```
 {
   "movies": [
     {
@@ -150,68 +154,79 @@ curl -i -H "Content-Type: application/json" -X GET -H "Authorization: Bearer $AS
   ],
   "success": true
 }
-
+```
 #### POST '/actors'
 Can be used to add new actor details.
+```
  curl -i -H "Content-Type: application/json" -X POST -H "Authorization: Bearer $PRODUCER_TOKEN" -d '{"name":"Bridgerton","gender":"M","age":"25"}' http://localhost:5000/actors
-
+```
+```
 {
   "created": 12,
   "message": "Successfully added actor",
   "success": true
 }
-
+```
 #### POST '/movies'
 Can be used to add new movie details.Returns the id and success message.
+```
  curl -i -H "Content-Type: application/json" -X POST -H "Authorization: Bearer $PRODUCER_TOKEN" -d '{"title":"Bridgerton", "release_date":"2021-02-01"}' http://localhost:5000/movies
- 
+```
+```
  {
   "created": 7,
   "message": "Successfully added movie",
   "success": true
 }
-
+```
 #### PATCH '/actors/update/{actor_id}'
 Used to update actor details by id.
+```
  curl -i -H "Content-Type: application/json" -X PATCH -H "Authorization: Bearer $PRODUCER_TOKEN" -d '{"name":"Bridgerton","gender":"M","age":"30"}' http://localhost:5000/actors/update/12
-
+```
+```
 {
   "actor": 12,
   "message": "Successfully updated actor",
   "success": true
 }
-
+```
 #### PATCH '/movies/update/{moive_id}'
 Used to update movie details by id.
+```
 curl -i -H "Content-Type: application/json" -X PATCH -H "Authorization: Bearer $PRODUCER_TOKEN" -d '{"title":"Bridgerton", "release_date":"2021-04-01"}' http://localhost:5000/movies/update/7
-
+```
+```
 {
   "message": "Successfully updated movie",
   "movie": 7,
   "success": true
 }
-
+```
 #### DELETE '/actors/delete/{actor_id}'
 Delete actor details by id from the database
-
+```
 curl -i -H "Content-Type: application/json" -X DELETE -H "Authorization: Bearer $PRODUCER_TOKEN" http://localhost:5000/actors/delete/12
-
+```
+```
 {
   "delete": 12,
   "message": "Successfully deleted actor",
   "success": true
 }
-
+```
 #### DELETE '/movies/delete/{movie_id}'
 Delete movie details by id from the database
+```
  curl -i -H "Content-Type: application/json" -X DELETE -H "Authorization: Bearer $PRODUCER_TOKEN" http://localhost:5000/movies/delete/7
-  
+```
+```
 {
   "delete": 7,
   "message": "Successfully deleted movie",
   "success": true
 }
-
+```
 ## Testing
 There are 17 unittests in test_app.py. To run this file use:
 ```
