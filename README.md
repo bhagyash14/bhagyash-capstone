@@ -66,7 +66,7 @@ Creates methods to serialize model data and helper methods to simplify API behav
 
 1.Casting Assistant : Permissions for GET operations. \
 2.Casting Director  : Permissions for GET,POST,PATCH,DELETE for actor and GET,PATCH for movie \
-3.Executive Producer: Permissions for GET,POST,PATCH,DELETE for actor and movie \
+3.Executive Producer: Permissions for GET,POST,PATCH,DELETE for actor and movie 
 ### Endpoint Library
 
 RESTful principles are followed throughout the project, including appropriate naming of endpoints, use of HTTP methods GET, POST, and DELETE.
