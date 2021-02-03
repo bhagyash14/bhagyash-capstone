@@ -16,7 +16,12 @@ The application aims at streamlining and simplifying the process of CRUD operati
 Install the latest version of python for your platform.
 
 #### PIP Dependencies
-
+Create a virtual env to work on the project.
+```
+python3 -m pip install virtualenv
+virtualenv capstone-venv
+source capstone-venv/Scripts/activate
+```
 Run the below to install all the necessary dependencies:
 
 ```bash
