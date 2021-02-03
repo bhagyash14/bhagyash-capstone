@@ -112,7 +112,7 @@ class CapstoneTestCase(unittest.TestCase):
     def testPatchActorFailure(self):
         res = self.client().patch('/actorsss/update/1', json=self.new_actor)
         self.assertEqual(res.status_code, 404)
-"""
+
     def testPatchMovieSuccess(self):
         res = self.client().patch('/movies/update/1', json=self.new_movie,
                                  headers=self.director_header)
@@ -120,7 +120,7 @@ class CapstoneTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
         self.assertTrue(data['message'],'Successfully updated movie')
-"""
+
     def testPatchMoviesFailure(self):
         res = self.client().patch('/moviesss/update/1', json=self.new_movie)
         self.assertEqual(res.status_code, 404)
@@ -146,7 +146,7 @@ class CapstoneTestCase(unittest.TestCase):
     def testDeleteMovieFailure(self):
         res = self.client().delete('/moviessss/delete/1')
         self.assertEqual(res.status_code, 404)
-"""
+
 
 if __name__ == "__main__":
     unittest.main()
